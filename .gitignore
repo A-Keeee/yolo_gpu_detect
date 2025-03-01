@@ -5,4 +5,3 @@ install/
 # 忽略日志文件夹
 log/
 test/
-model/
