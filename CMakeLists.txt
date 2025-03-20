@@ -12,7 +12,7 @@ if(NOT ONNXRUNTIME_ROOTDIR)
         set(ONNXRUNTIME_ROOTDIR "C:/Program Files (x86)/onnxruntime")
     else()
         # 非 Windows 系统下设置默认路径
-        set(ONNXRUNTIME_ROOTDIR "/home/mechax/zyb/onnxruntime-linux-x64-gpu-1.20.0")
+        set(ONNXRUNTIME_ROOTDIR "/home/qianli/onnxruntime-linux-x64-gpu-1.20.0")
     endif()
 endif()
 

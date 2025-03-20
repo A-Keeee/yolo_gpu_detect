@@ -238,10 +238,10 @@ void DetectTest()
     params.rectConfidenceThreshold = 0.6;
     params.iouThreshold = 0.5;
     if (params.modelType == YOLO_ARMOR){
-        params.modelPath = "src/armor.onnx";
+        params.modelPath = "model/armor.onnx";
     }
     else if (params.modelType == YOLO_POSE){
-        params.modelPath = "src/rm_buff.onnx";
+        params.modelPath = "model/rm_buff.onnx";
     }
 
 
@@ -257,7 +257,7 @@ void DetectTest()
 
 #else
     // CPU inference
-    params.modelType = YOLO_DETECT_V8;
+    // params.modelType = YOLO_DETECT_V8;
     params.cudaEnable = false;
 
 #endif

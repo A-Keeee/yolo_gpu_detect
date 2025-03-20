@@ -1,6 +1,7 @@
 #pragma once
 
-#define    USE_CUDA
+//GPU
+// #define    USE_CUDA
 #define    RET_OK nullptr
 
 #ifdef _WIN32
@@ -40,7 +41,7 @@ enum MODEL_TYPE
 typedef struct _DL_INIT_PARAM
 {
     std::string modelPath;
-    MODEL_TYPE modelType = YOLO_ARMOR;
+    MODEL_TYPE modelType = YOLO_POSE;
     std::vector<int> imgSize = { 640, 640 };
     float rectConfidenceThreshold = 0.6;
     float iouThreshold = 0.5;
