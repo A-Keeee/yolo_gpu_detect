@@ -235,9 +235,10 @@ char* YOLO_V8::TensorProcess(clock_t& starttime_1, cv::Mat& iImg, N& blob, std::
     switch (modelType)
     {
     case YOLO_DETECT_V8:
-    case YOLO_DETECT_V8_HALF:
+    case YOLO_ARMOR_V8_HALF:
     case YOLO_ARMOR:
     case YOLO_POSE:
+    case YOLO_POSE_V8_HALF:
     {
         int signalResultNum = outputNodeDims[1];//25200
         int strideNum = outputNodeDims[2];//22
@@ -314,7 +315,7 @@ char* YOLO_V8::TensorProcess(clock_t& starttime_1, cv::Mat& iImg, N& blob, std::
                 oResult.push_back(result);
             }
         }
-        else if(modelType == YOLO_ARMOR){
+        else if(modelType == YOLO_ARMOR || modelType == YOLO_ARMOR_V8_HALF){   
             // rawData = rawData.t();
             float* data = (float*)rawData.data;
             // std::cout << "YOLO_ARMOR" << std::endl;
@@ -383,6 +384,7 @@ char* YOLO_V8::TensorProcess(clock_t& starttime_1, cv::Mat& iImg, N& blob, std::
                 int idx = nmsResult[i];
                 DL_RESULT result;
                 result.classId = number_ids[idx];
+                result.color_id = color_ids[idx];
                 result.confidence = confidences[idx];
                 result.box = boxes[idx];
                 std::vector<cv::Point2f> four_points = key_points_vec[idx];
@@ -392,8 +394,8 @@ char* YOLO_V8::TensorProcess(clock_t& starttime_1, cv::Mat& iImg, N& blob, std::
 
         }
 
-        else if(modelType == YOLO_POSE){
-            std::cout << "YOLO_POSE" << std::endl;
+        else if(modelType == YOLO_POSE ||   modelType == YOLO_POSE_V8_HALF){
+            // std::cout << "YOLO_POSE" << std::endl;
             rawData = rawData.t();
             float* data = (float*)rawData.data;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 //GPU
-// #define    USE_CUDA
+#define    USE_CUDA
 #define    RET_OK nullptr
 
 #ifdef _WIN32
@@ -32,7 +32,8 @@ enum MODEL_TYPE
     //FLOAT16 MODEL
     YOLO_DETECT_V8_HALF = 4,
     YOLO_POSE_V8_HALF = 5,
-    YOLO_CLS_HALF = 6
+    YOLO_CLS_HALF = 6,
+    YOLO_ARMOR_V8_HALF = 7,
     
 
 };
@@ -41,7 +42,7 @@ enum MODEL_TYPE
 typedef struct _DL_INIT_PARAM
 {
     std::string modelPath;
-    MODEL_TYPE modelType = YOLO_POSE;
+    MODEL_TYPE modelType = YOLO_ARMOR_V8_HALF;
     std::vector<int> imgSize = { 640, 640 };
     float rectConfidenceThreshold = 0.6;
     float iouThreshold = 0.5;
@@ -55,6 +56,7 @@ typedef struct _DL_INIT_PARAM
 typedef struct _DL_RESULT
 {
     int classId;
+    int color_id;
     float confidence;
     cv::Rect box;
     std::vector<cv::Point2f> keyPoints;

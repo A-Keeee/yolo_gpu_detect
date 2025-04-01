@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(yolo_pose_buff)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
@@ -12,7 +12,7 @@ if(NOT ONNXRUNTIME_ROOTDIR)
         set(ONNXRUNTIME_ROOTDIR "C:/Program Files (x86)/onnxruntime")
     else()
         # 非 Windows 系统下设置默认路径
-        set(ONNXRUNTIME_ROOTDIR "/home/qianli/onnxruntime-linux-x64-gpu-1.20.0")
+        set(ONNXRUNTIME_ROOTDIR "/home/amov/onnxruntime")
     endif()
 endif()
 
@@ -32,8 +32,8 @@ include_directories(
 )
 
 # 查找依赖项
-find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
+#find_package(ament_cmake REQUIRED)
+#find_package(rclcpp REQUIRED)
 find_package(OpenCV REQUIRED)
 
 # 添加可执行文件
@@ -43,7 +43,7 @@ add_executable(yolo_pose_buff
 )
 
 # 设置依赖关系
-ament_target_dependencies(yolo_pose_buff rclcpp)
+#ament_target_dependencies(yolo_pose_buff rclcpp)
 
 # 链接库文件
 link_directories(${ONNXRUNTIME_ROOTDIR}/lib)
@@ -57,16 +57,10 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
-)
 
-# 启用测试并进行自动化检查
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
 
-ament_package()
+
+#ament_package()
+
+
+

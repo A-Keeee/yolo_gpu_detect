@@ -5,10 +5,12 @@
 #include <fstream>
 #include <random>
 
+// cd .. && rm -r build && mkdir build && cd build && cmake .. && make -j4 && ./yolo_pose_buff 
+
 void Detector(YOLO_V8*& p) {
     _DL_INIT_PARAM params;
     std::filesystem::path current_path = std::filesystem::current_path();
-    std::filesystem::path imgs_path = "images";
+    std::filesystem::path imgs_path = "/home/amov/fyk/yolo_gpu_detect/images";
     for (auto& i : std::filesystem::directory_iterator(imgs_path))
     {
         if (i.path().extension() == ".jpg" || i.path().extension() == ".png" || i.path().extension() == ".jpeg")
@@ -170,7 +172,7 @@ void Classifier(YOLO_V8*& p)
 int ReadCocoYaml(YOLO_V8*& p) {
     _DL_INIT_PARAM params;
     // Open the YAML file
-    std::ifstream file("src/classes.yaml");
+    std::ifstream file("/home/amov/fyk/yolo_gpu_detect/src/classes.yaml");
     if (!file.is_open())
     {
         std::cerr << "Failed to open file" << std::endl;
@@ -238,12 +240,17 @@ void DetectTest()
     params.rectConfidenceThreshold = 0.6;
     params.iouThreshold = 0.5;
     if (params.modelType == YOLO_ARMOR){
-        params.modelPath = "model/armor.onnx";
+        params.modelPath = "/home/amov/fyk/yolo_gpu_detect/model/armor.onnx";
+    }
+    else if (params.modelType == YOLO_ARMOR_V8_HALF){
+        params.modelPath = "/home/amov/fyk/yolo_gpu_detect/model/armor_fp16.onnx";
     }
     else if (params.modelType == YOLO_POSE){
-        params.modelPath = "model/rm_buff.onnx";
+        params.modelPath = "/home/amov/fyk/yolo_gpu_detect/model/buff480.onnx";
     }
-
+    else if (params.modelType == YOLO_POSE_V8_HALF){
+        params.modelPath = "/home/amov/fyk/yolo_gpu_detect/model/buff480_fp16.onnx";
+    }
 
     params.imgSize = { 640, 640 };
 #ifdef USE_CUDA
