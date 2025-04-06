@@ -12,7 +12,7 @@ if(NOT ONNXRUNTIME_ROOTDIR)
         set(ONNXRUNTIME_ROOTDIR "C:/Program Files (x86)/onnxruntime")
     else()
         # 非 Windows 系统下设置默认路径
-        set(ONNXRUNTIME_ROOTDIR "/home/qianli/onnxruntime-linux-x64-gpu-1.20.0")
+        set(ONNXRUNTIME_ROOTDIR "/home/fyk/onnxruntime-linux-x64-gpu-1.20.0")
     endif()
 endif()
 
@@ -29,6 +29,7 @@ include_directories(
   ${ONNXRUNTIME_ROOTDIR}/include
   ${ONNXRUNTIME_ROOTDIR}/include/onnxruntime/core/session
   ${CMAKE_SOURCE_DIR}/include/yolo_pose_buff
+  /usr/include/openvino/runtime
 )
 
 # 查找依赖项
@@ -49,7 +50,8 @@ ament_target_dependencies(yolo_pose_buff rclcpp)
 link_directories(${ONNXRUNTIME_ROOTDIR}/lib)
 
 # 链接 OpenCV 和 ONNX Runtime 库
-target_link_libraries(yolo_pose_buff ${OpenCV_LIBRARIES} onnxruntime)
+target_link_libraries(yolo_pose_buff ${OpenCV_LIBRARIES} 
+ /usr/lib/libopenvino.so)
 
 # 安装目标文件
 install(TARGETS
@@ -57,10 +59,7 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
-)
+
 
 # 启用测试并进行自动化检查
 if(BUILD_TESTING)
