@@ -4,6 +4,7 @@
 #include <chrono>  // 添加时间库
 
 int main() {
+    // const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/buff640_openvino_opset13/best.xml";
     const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/rm_buff.onnx";
     const std::string image_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/images/1.png";
     
