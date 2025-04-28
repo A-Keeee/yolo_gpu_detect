@@ -4,9 +4,10 @@
 #include <chrono>  // 添加时间库
 
 int main() {
+    const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/FaterYU_model/buff_quantized.xml";
     // const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/buff640_openvino_opset13/best.xml";
-    const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/rm_buff.onnx";
-    const std::string image_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/images/1.png";
+    const std::string model_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/model/buff640_fp16.onnx";
+    const std::string image_path = "/home/fyk/fyk/yolo_gpu_detect_openvino/images/qianlirune.png";
     
     cv::Mat image = cv::imread(image_path);
     
@@ -15,7 +16,7 @@ int main() {
         return 1;
     }
     
-    const float confidence_threshold = 0.5;
+    const float confidence_threshold = 0.6;
     const float NMS_threshold = 0.5;
     
     yolo::Inference inference(model_path, cv::Size(640, 640), confidence_threshold, NMS_threshold);

@@ -58,7 +58,7 @@ void Inference::InitializeModel(const std::string &model_path) {
     model = ppp.build(); // 完成预处理管道构建
 
     // 编译模型，自动选择设备
-    compiled_model_ = core.compile_model(model, "CPU");
+    compiled_model_ = core.compile_model(model, "AUTO");
     // 创建推理请求对象
     inference_request_ = compiled_model_.create_infer_request();
 
